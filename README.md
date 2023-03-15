@@ -2,7 +2,7 @@
 ## Given Task
 
 ### 1.	Change the “skin” of Mario
-#### a.	Change the look of the main character. You can make it whatever you like (even changing the hue/saturation works). The more different, the better.
+#### .	Change the look of the main character. You can make it whatever you like (even changing the hue/saturation works). The more different, the better.
 ### 2.	Invert the Timer in this Mario Game:
 #### .	The current timer of the game is a count down, you need to change it to a count up that shows the amount of time spent for one play of the game.
 ### 3.	Change direction keys:
