@@ -56,7 +56,8 @@ private gameOver() {
   }
 }
 ```
-### Bonus Task:
+## Bonus Task:
+
 ```
 1)	In src -> scripts -> scenes -> mainScene.ts 
 -The “highJump.ts” and “multiplier.ts” was added in a switch statement.
