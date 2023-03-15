@@ -10,7 +10,8 @@
 ### 4.	Change the background of the game. Make it something of your choice.
 ### 5.	Add a Game Over sound when the player's lives become zero and the game ends.
 
-### Completed Task 
+## Completed Task 
+
 #### 1) Change the “skin” of Mario
 ```
 In folder src -> scenes -> preloadScene.ts 
