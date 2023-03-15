@@ -59,11 +59,11 @@ private gameOver() {
 ## Bonus Task:
 
 ```
-1)	In src -> scripts -> scenes -> mainScene.ts 
+1)In src -> scripts -> scenes -> mainScene.ts 
 -The “highJump.ts” and “multiplier.ts” was added in a switch statement.
 ```
 ```
-2) “highJump.ts” file and “scoreMultiplier” files were created in
+2)“highJump.ts” file and “scoreMultiplier” files were created in
 src -> scripts -> objects -> powerUps
 ```
 
