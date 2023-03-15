@@ -1,4 +1,4 @@
-export default class CountDown extends Phaser.Events.EventEmitter {
+export default class CountUp extends Phaser.Events.EventEmitter {
   private timedEvent: Phaser.Time.TimerEvent
   private scene: Phaser.Scene
   private current: number
@@ -9,18 +9,16 @@ export default class CountDown extends Phaser.Events.EventEmitter {
     this.scene = scene
   }
 
-  start(time = 250) {
-    this.current = time
+  start() {
+    // Timer starts at 0
+    this.current = 0
     this.timedEvent?.remove()
     this.timedEvent = this.scene.time.addEvent({
       delay: this.delay,
       callback: () => {
-        this.current--
+        //Time incremented
+        this.current++;
         this.emit('interval', this.current)
-        if (this.current === 0) {
-          this.timedEvent.remove()
-          this.emit('end', this.current)
-        }
       },
       loop: true,
     })

@@ -1,7 +1,7 @@
 import config from '../config'
 import AnimatedTiles from '../helpers/animatedTiles'
 import Debug from '../helpers/debug'
-import CountDown from '../helpers/countdown'
+import CountUp from '../helpers/countdown'
 
 import Hud from '../objects/hud'
 import Player from '../objects/player'
@@ -9,9 +9,9 @@ import Brick from '../objects/brick'
 import CoinSpin from '../objects/coinSpin'
 import Flag from '../objects/flag'
 import { Enemy, EnemyGroup, EnemyName } from '../objects/enemies'
-import { PowerUpGroup, Mushroom, Flower, Star } from '../objects/powerUps'
+import { PowerUpGroup, Mushroom, highJump,Flower, Star, ScoreMultiplier } from '../objects/powerUps'
 
-import { Move, Jump, Large, Fire, Invincible, EnterPipe, HitBrick } from '../powers'
+import { Move, Jump, Large, Fire, Invincible, EnterPipe, HitBrick, JumpHigh } from '../powers'
 import { arrayProps2ObjProps } from '../utils'
 import { container } from 'tsyringe'
 
@@ -94,12 +94,10 @@ export default class MainScene extends Phaser.Scene {
     new Flag(this, endPoint.pixelX, endPoint.pixelY).overlap(this.mario, () => this.restartGame(false))
 
     // 游戏倒计时
-    new CountDown(this)
-      .start(config.playTime)
-      .on('interval', (time: number) => {
-        this.hud.setValue('time', time)
-      })
-      .on('end', () => this.mario.die())
+    new CountUp(this)
+      .start()
+      .on('interval', (time: number) => this.hud.setValue('time', time))
+      .on('end', () => this.mario.die());
 
     // 调试
     new Debug({ scene: this, layer: worldLayer })
@@ -266,6 +264,12 @@ export default class MainScene extends Phaser.Scene {
       case '1up':
         params = [Mushroom, null, { type: '1up' }, () => this.hud.incDec('lives', 1)]
         break
+      case 'high-jump':
+        params = [highJump, JumpHigh]
+        break
+      case 'multiplier':
+        params = [ScoreMultiplier, null, { duration: 30 }, () => this.hud.setMultiplier(2)]
+        break
       default:
         new CoinSpin(this, x, y, 'atlas').spin()
     }
@@ -292,8 +296,10 @@ export default class MainScene extends Phaser.Scene {
   }
 
   private gameOver() {
-    if (window.confirm('GameOver!')) {
-      this.restartGame(false)
+    this.sound.play('game-over-sound');
+    if (window.confirm('GameOver! Press OK to restart game')) {
+      this.restartGame(false);
     }
+
   }
 }

@@ -27,13 +27,15 @@ export default class PreloadScene extends Phaser.Scene {
       spacing: 2,
     })
 
-    this.load.atlas('atlas', 'assets/mario-sprites.png', 'assets/mario-sprites.json')
+    this.load.atlas('atlas', 'assets/mario-sprite2.png', 'assets/mario-sprites.json')
 
     // 马赛克字体
     this.load.bitmapFont('font', 'assets/fonts/font.png', 'assets/fonts/font.fnt')
 
     // 背景音乐
     this.load.audio('overworld', 'assets/music/overworld.mp3')
+    // game over sound
+    this.load.audio('game-over-sound', 'assets/music/game-over-sound.mp3');
     // 游戏特效音乐
     this.load.audioSprite('sfx', 'assets/audio/sfx.json', ['assets/audio/sfx.ogg', 'assets/audio/sfx.mp3'], {
       instances: 4,
@@ -42,5 +44,6 @@ export default class PreloadScene extends Phaser.Scene {
 
   create() {
     this.scene.start('MainScene')
+    this.sound.play('gameOver')
   }
 }

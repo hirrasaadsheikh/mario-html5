@@ -45,12 +45,12 @@ export class PowerUp extends Phaser.GameObjects.Sprite {
     this.scene.sound.playAudioSprite('sfx', 'smb_powerup')
     this.destroy()
   }
-
   /**
    * 执行玩家与游戏道具接触的检测
    * @param player 玩家
    * @param callback 接触后的回调函数
    */
+
   public overlap(player: Player, callback: Function) {
     // @ts-ignore
     this.scene.physics.add.overlap(this, player, (powerUp: PowerUp, player: Player) => {

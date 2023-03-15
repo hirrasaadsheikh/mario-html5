@@ -34,11 +34,12 @@ export class Move implements Power {
 
     // 移动
     if (cursors.left.isDown) {
-      player.setFlipX(true)
-      player.body.setAccelerationX(-ax - (velocity.x > 0 ? velocity.x * 2 : 0))
-    } else if (cursors.right.isDown) {
-      player.setFlipX(false)
+      player.setFlipX(false) // Flip the sprite horizontally to face the right direction
       player.body.setAccelerationX(ax + (velocity.x < 0 ? -velocity.x * 2 : 0))
+    }
+    else if (cursors.right.isDown) {
+      player.setFlipX(true) // Flip the sprite horizontally to face the left direction
+      player.body.setAccelerationX(-ax - (velocity.x > 0 ? velocity.x * 2 : 0))
     } else {
       if (Math.abs(velocity.x) < stopSpeed) {
         player.body.setVelocityX(0).setAcceleration(0, 0)

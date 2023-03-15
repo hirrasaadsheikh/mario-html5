@@ -1,6 +1,7 @@
 import { PowerManage } from '../powers'
-import { Enemy } from '../objects/enemies'
+import { Enemy } from './enemies'
 import { lives } from '../helpers/decorators'
+import { PowerUp, ScoreMultiplier } from './powerUps'
 
 type Config = {
   scene: Phaser.Scene
@@ -33,6 +34,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
    * 玩家动画 key 后缀
    */
   animSuffix = ''
+  scoreMultiplier = 1;
+
 
   constructor({ scene, x, y, texture, frame, allowPowers }: Config) {
     super(scene, x, y, texture, frame)
@@ -189,5 +192,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
    */
   colliderWorld(tile: Phaser.Tilemaps.Tile) {
     return this.powers.allowPowers.some((name) => this.powers.get(name)?.colliderWorld?.(this, tile))
+  }
+  applyPowerUp(powerUp: PowerUp) {
+    if (powerUp instanceof ScoreMultiplier) {
+      this.scoreMultiplier = 2 // set the score multiplier to 2
+      powerUp.startTimer(() => {
+        this.scoreMultiplier = 1 // reset the score multiplier to 1 after the power up duration
+      })
+    }
   }
 }

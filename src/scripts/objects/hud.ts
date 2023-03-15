@@ -6,6 +6,7 @@ interface TextItem {
 
 export default class Hud {
   private items: TextItem[] = []
+  private multiplier: number
 
   constructor(scene: Phaser.Scene, items: TextItem[]) {
     const canvas = scene.sys.game.canvas
@@ -44,6 +45,12 @@ export default class Hud {
    */
   public incDec(key: string, value: number) {
     this[key].value = Number(this[key].value) + value
+  }
+  setMultiplier(value) {
+    this.multiplier = value;
+    setTimeout(() => {
+      this.multiplier = 1;
+    }, 30000); // reset multiplier after 30 seconds
   }
 }
 
